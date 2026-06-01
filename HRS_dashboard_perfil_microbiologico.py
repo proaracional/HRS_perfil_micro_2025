@@ -367,7 +367,7 @@ if RUTA_LOGO.exists():
 else:
     st.warning(f"No se encontro el logo: {RUTA_LOGO.name}")
 
-st.title("Perfil Microbiológico Hospitalario 2025")
+st.title("Perfil microbiologico hospitalario")
 
 try:
     df, archivos = cargar_datos()
@@ -432,12 +432,13 @@ with tab_perfil:
 
         perfil["(%)"] = perfil["(%)"].apply(lambda valor: f"{valor:.1f}%" if pd.notna(valor) else "")
         columnas_resistencia = [col for col in perfil.columns if col not in ["Microorganismo", "#", "(%)"]]
+        perfil_tabla = perfil.set_index("Microorganismo")
         tabla = (
-            perfil.style
+            perfil_tabla.style
             .format({col: "{:.0f}%" for col in columnas_resistencia}, na_rep="")
             .map(colorear_resistencia, subset=columnas_resistencia)
         )
-        st.dataframe(tabla, width="stretch", hide_index=True)
+        st.dataframe(tabla, width="stretch")
 
 with tab_proa:
     resumen = indicadores_proa(df_filtrado)
