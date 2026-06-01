@@ -367,7 +367,7 @@ if RUTA_LOGO.exists():
 else:
     st.warning(f"No se encontro el logo: {RUTA_LOGO.name}")
 
-st.title("Perfil microbiologico hospitalario")
+st.title("Perfil Microbiológico Hospitalario 2025")
 
 try:
     df, archivos = cargar_datos()
